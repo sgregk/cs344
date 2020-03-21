@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
   GpuTimer timer;
   timer.Start();
   //call the students' code
-  your_rgba_to_greyscale(h_rgbaImage, d_rgbaImage, h_greyImage, numRows(), numCols());
+  your_rgba_to_greyscale(h_rgbaImage, d_rgbaImage, d_greyImage, numRows(), numCols());
   timer.Stop();
   cudaDeviceSynchronize(); checkCudaErrors(cudaGetLastError());
 
@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
   }
 
   size_t numPixels = numRows()*numCols();
-  //checkCudaErrors(cudaMemcpy(h_greyImage, d_greyImage, sizeof(unsigned char) * numPixels, cudaMemcpyDeviceToHost));
+  checkCudaErrors(cudaMemcpy(h_greyImage, d_greyImage, sizeof(unsigned char) * numPixels, cudaMemcpyDeviceToHost));
 
   //check results and output the grey image
   postProcess(output_file, h_greyImage);
