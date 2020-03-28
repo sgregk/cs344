@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "gputimer.h"
 
-#define NUM_THREADS 1000000
+#define NUM_THREADS 10000000
 #define ARRAY_SIZE  100
 
 #define BLOCK_WIDTH 1000
@@ -50,7 +50,7 @@ int main(int argc,char **argv)
 
     // launch the kernel - comment out one of these
     timer.Start();
-    // increment_naive<<<NUM_THREADS/BLOCK_WIDTH, BLOCK_WIDTH>>>(d_array);
+    //increment_naive<<<NUM_THREADS/BLOCK_WIDTH, BLOCK_WIDTH>>>(d_array);
     increment_atomic<<<NUM_THREADS/BLOCK_WIDTH, BLOCK_WIDTH>>>(d_array);
     timer.Stop();
     
